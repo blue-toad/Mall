@@ -1,8 +1,19 @@
 <template>
   <div id="app">
-    <h1>我是王鑫的爸爸</h1>
     <router-view/>
+    <TabBar/>
   </div>
 </template>
 
+<script>
+  import TabBar from "components/common/tabbar/TabBar";
+  export default {
+    components: {
+      TabBar
+    }
+  }
+</script>
 
+<style>
+  @import "assets/css/base.css";
+</style>
