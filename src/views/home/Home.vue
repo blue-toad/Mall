@@ -31,7 +31,56 @@
             {{item.title}}
           </div>
         </div>
+      </div>
+<!--      推荐商品-->
+      <div>
+          <q-layout>
 
+            <q-header bordered class="text-black" height-hint="98">
+              <q-tabs align="center">
+                <q-route-tab to="/page1" label="热销" />
+                <q-route-tab to="/page2" label="推荐" />
+                <q-route-tab to="/page3" label="第三" />
+              </q-tabs>
+            </q-header>
+
+            <q-page-container>
+              <div style="display: flex">
+<!--                左边-->
+                <div style="width: 50%;flex: auto">
+                  <q-card class="my-card">
+                    <img src="https://cdn.quasar.dev/img/mountains.jpg">
+
+                    <q-card-section>
+                      <div class="text-h6">Our Changing Planet</div>
+                      <div class="text-subtitle2">by John Doe</div>
+                    </q-card-section>
+
+                    <q-card-section class="q-pt-none">
+                      {{ padding }}
+                    </q-card-section>
+                  </q-card>
+                </div>
+<!--                右边-->
+                <div style="width: 50%;flex: auto">
+                  <q-card class="my-card">
+                    <img src="http://s11.mogucdn.com/mlcdn/c45406/180808_600abce0g8dc8i4f6ic7k27i7837l_640x960.jpg_320x999.jpg">
+
+                    <q-card-section style="padding: 0">
+                      <q-field outlined stack-label :dense="true" :borderless="true" maxlength="15">
+                        <template v-slot:control>
+                          <div class="self-center full-width no-outline good-info" tabindex="0" >"2018秋季新款韩版百搭格子长袖衬衫+前短后长针织气质开衫外套+高腰直筒九分牛仔裤三件套装"</div>
+                        </template>
+                      </q-field>
+                    </q-card-section>
+
+                  </q-card>
+                </div>
+              </div>
+
+            </q-page-container>
+
+          </q-layout>
       </div>
     </div>
   </div>
@@ -39,7 +88,7 @@
 
 <script>
   import NavBar from "components/common/navbar/NavBar.vue";
-  import {getHomeMultidata} from "@/utils/home";
+  import {getHomeMultidata, getHomeGoods} from "@/utils/home";
 
   export default {
     name: "Home",
@@ -51,16 +100,34 @@
         slide: 0,
         padding: false,
         banners: [],
-        recommends: []
+        recommends: [],
+        goods: {
+          pop: {page: 0, list: []},
+          new: {page: 0, list: []},
+          sel: {page: 0, list: []}
+        }
       }
     },
     created() {
+      //获得轮播图的信息和推荐栏的信息
       getHomeMultidata().then(res => {
         this.banners = res.data.banner.list
         this.recommends = res.data.recommend.list
-        console.log(this.recommends);
-      })
+        // console.log(this.recommends);
+      });
+      // 获得下面的商品信息
+      this.getHomeGoods();
     },
+    methods: {
+      getHomeGoods(){
+        getHomeGoods('pop', 1).then(res => {
+          this.goods.pop.list.push(...res.data.list)
+
+          console.log(this.goods.pop.list);
+          console.log(res)
+        })
+      }
+    }
   }
 </script>
 
@@ -90,6 +157,10 @@
   }
   .recommend-img-box {
     padding: 6%;
+  }
+  .good-info {
+    font-size: 5px;
+
   }
 
 </style>
