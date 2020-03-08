@@ -1,7 +1,6 @@
 <template>
   <div>
     <nav-bar class="nav-bar"><div slot="center">购物街</div></nav-bar>
-    <div><h1>首页</h1></div>
   </div>
 </template>
 
