@@ -1,13 +1,24 @@
 <template>
-  <div><h1>首页</h1></div>
+  <div>
+    <nav-bar class="nav-bar"><div slot="center">购物街</div></nav-bar>
+    <div><h1>首页</h1></div>
+  </div>
 </template>
 
 <script>
+  import NavBar from "components/common/navbar/NavBar.vue";
   export default {
-    name: "Home"
+    name: "Home",
+    components: {
+      NavBar
+    }
   }
 </script>
 
 <style scoped>
-
+  .nav-bar {
+    background-color: #ff8198;
+    font-weight: 700;
+    color: #fff;
+  }
 </style>
