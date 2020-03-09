@@ -89,7 +89,8 @@
                       </q-field>
                     </q-card-section>
 
-                  </q-card><q-card class="my-card">
+                  </q-card>
+                  <q-card class="my-card">
                   <img src="http://s11.mogucdn.com/mlcdn/c45406/180808_600abce0g8dc8i4f6ic7k27i7837l_640x960.jpg_320x999.jpg">
 
                   <q-card-section style="padding: 0">

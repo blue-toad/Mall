@@ -1,6 +1,23 @@
 <template>
   <div>
-    <swiper :banners="banners" :recommends="recommends"></swiper>
+    <q-layout view="hHh lpR fFf">
+<!--      头部的navbar-->
+<!--      使用toorbar无法对高度进行调整不知道为什么-->
+<!--      q-bar中的内容使用flex布局进行-->
+      <q-header class="shadow-1 text-center" text-white >
+        <q-bar class="bg-pink-4" style="height: 43px">
+          <div style="flex: auto">蘑菇街</div>
+        </q-bar>
+      </q-header>
+      <q-page-container>
+<!--        调用已经封装的轮播图-->
+        <swiper :banners="banners" :recommends="recommends" class="position"/>
+
+        <router-view/>
+      </q-page-container>
+
+    </q-layout>
+
   </div>
 </template>
 
@@ -38,7 +55,7 @@
     methods: {
       getHomeGoods(){
         getHomeGoods('pop', 1).then(res => {
-          this.goods.pop.list.push(...res.data.list)
+          this.goods.pop.list.push(...res.data.list)//这是一个将一个数组中的所有元素push进另一个数组的方法
           // console.log(this.goods.pop.list);
           // console.log(res)
         })
@@ -49,4 +66,7 @@
 
 <style scoped>
 
+  .position {
+
+  }
 </style>
