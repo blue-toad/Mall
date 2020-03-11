@@ -4,7 +4,7 @@
 <!--      头部的navbar-->
 <!--      使用toorbar无法对高度进行调整不知道为什么-->
 <!--      q-bar中的内容使用flex布局进行-->
-      <q-header class="shadow-1 text-center" text-white >
+      <q-header class="shadow-1 text-center" text-white reveal>
         <q-bar class="bg-pink-4" style="height: 43px">
           <div style="flex: auto">蘑菇街</div>
         </q-bar>
@@ -12,8 +12,8 @@
       <q-page-container>
 <!--        调用已经封装的轮播图-->
         <swiper :banners="banners" :recommends="recommends" class="position"/>
+        <Goods />
 
-        <router-view/>
       </q-page-container>
 
     </q-layout>
@@ -23,22 +23,19 @@
 
 <script>
   import Swiper from "components/home/Swiper.vue";
-  import {getHomeMultidata, getHomeGoods} from "@/utils/home";
+  import Goods from "./Goods";
+  import {getHomeMultidata} from "@/utils/home";
 
   export default {
     name: "Home",
     components: {
-      Swiper
+      Swiper,
+      Goods
     },
     data() {
       return {
         banners: [],
         recommends: [],
-        goods: {
-          pop: {page: 0, list: []},
-          new: {page: 0, list: []},
-          sel: {page: 0, list: []}
-        }
       }
     },
     created() {
@@ -46,20 +43,12 @@
       getHomeMultidata().then(res => {
         this.banners = res.data.banner.list
         this.recommends = res.data.recommend.list
-        console.log(this.recommends);
-        console.log(this.banners);
+        // console.log(this.recommends);
+        // console.log(this.banners);
       });
-      // 获得下面的商品信息
-      this.getHomeGoods();
     },
     methods: {
-      getHomeGoods(){
-        getHomeGoods('pop', 1).then(res => {
-          this.goods.pop.list.push(...res.data.list)//这是一个将一个数组中的所有元素push进另一个数组的方法
-          // console.log(this.goods.pop.list);
-          // console.log(res)
-        })
-      }
+
     }
   }
 </script>
