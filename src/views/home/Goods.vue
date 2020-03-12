@@ -1,94 +1,85 @@
 <template>
-  <q-page>
-    <div id="q-app">
-      <div>
-        <q-card>
-          <q-tabs
-                  v-model="tab"
-                  dense
-                  class="text-grey"
-                  active-color="primary"
-                  indicator-color="primary"
-                  align="justify"
-          >
-            <q-tab name="mails" label="人气" ></q-tab>
-            <q-tab name="alarms" label="新品" ></q-tab>
-            <q-tab name="movies" label="热销" ></q-tab>
-          </q-tabs>
+  <div>
+    <q-card>
+      <q-tabs
+              v-model="tab"
+              dense
+              class="text-grey"
+              active-color="pink-4"
+              indicator-color="pink-4"
+              align="justify"
+      >
+        <q-tab name="mails" label="人气" ></q-tab>
+        <q-tab name="alarms" label="新品" ></q-tab>
+        <q-tab name="movies" label="热销" ></q-tab>
+      </q-tabs>
 
-          <q-separator ></q-separator>
 
-          <q-tab-panels v-model="tab" animated swipeable v-if="goods.pop.list.length">
-            <q-tab-panel name="mails" style="padding: 0;height: 100%">
-              <!--        滚动条-->
+      <q-tab-panels v-model="tab" animated swipeable v-if="goods.pop.list.length">
+        <q-tab-panel name="mails" style="padding: 0;">
+        <!--        滚动条-->
 <!--              注意在使用无限滚动时一定要在外层组件中写上height或者maxheigt-->
+<!--              默认的滚动容器就是其包裹的子容器，也就是scroll-target属性-->
 <!--              否则就会一直触发onload方法-->
-              <q-infinite-scroll @load="onLoad" :offset="300" :scroll-target="$refs.scrollTargetRef">
-                <div style="display: flex;max-height: 1000px" >
+<!--              然后无尽滚动条的内部不要指定最大高度-->
 
-                  <!--          左边-->
-                  <div style="flex: auto;width: 50%">
-                    <div id="list-left">
-                      <div v-for="n in array1" :key="n" class="q-pt-sm q-pl-sm">
-                        <q-card class="my-card">
-                          <img :src="goods.pop.list[n].show.img" class="shadow-2">
-                          <q-card-section style="padding: 4px">
-                            <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
-                              {{ goods.pop.list[n].title}}
-                            </div>
-                            <div class="text-pink-4">
-                              ￥{{ goods.pop.list[n].price }}
-                            </div>
-                          </q-card-section>
-                        </q-card>
+          <div style="display: flex;" v-if="goods.pop.list.length">
+
+            <!--          左边-->
+            <div style="flex: auto;width: 50%;">
+              <div id="list-left">
+                <div v-for="n in array1" :key="n" class="q-pt-sm q-pl-sm">
+                  <q-card class="my-card">
+                    <img :src="goods.pop.list[n].show.img" class="shadow-2">
+                    <q-card-section style="padding: 4px">
+                      <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
+                        {{ goods.pop.list[n].title}}
                       </div>
-                    </div>
-                  </div>
-
-                  <!--          右边-->
-                  <div style="flex: auto;width: 50%">
-                    <div id="list-right">
-                      <div v-for="n in array2" :key="n" class="q-pt-sm q-px-sm">
-                        <q-card class="my-card" >
-                          <img :src="goods.pop.list[n].show.img" class="shadow-2">
-                          <q-card-section style="padding: 4px">
-                            <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
-                              {{ goods.pop.list[n].title}}
-                            </div>
-                            <div class="text-pink-4">
-                              ￥{{ goods.pop.list[n].price }}
-                            </div>
-                          </q-card-section>
-                        </q-card>
+                      <div class="text-pink-4">
+                        ￥{{ goods.pop.list[n].price }}
                       </div>
-                    </div>
-                  </div>
-
+                    </q-card-section>
+                  </q-card>
                 </div>
-                <template v-slot:loading>
-                  <div class="row justify-center q-my-md">
-                    <q-spinner-dots color="bg-pink-4" size="40px" />
-                  </div>
-                </template>
-              </q-infinite-scroll>
-            </q-tab-panel>
+              </div>
+            </div>
 
-            <q-tab-panel name="alarms">
-              <div class="text-h6">Alarms</div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </q-tab-panel>
+            <!--          右边-->
+            <div style="flex: auto;width: 50%;">
+              <div id="list-right">
+                <div v-for="n in array2" :key="n" class="q-pt-sm q-px-sm">
+                  <q-card class="my-card" >
+                    <img :src="goods.pop.list[n].show.img" class="shadow-2">
+                    <q-card-section style="padding: 4px">
+                      <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
+                        {{ goods.pop.list[n].title}}
+                      </div>
+                      <div class="text-pink-4">
+                        ￥{{ goods.pop.list[n].price }}
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
 
-            <q-tab-panel name="movies">
-              <div class="text-h6">Movies</div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </q-tab-panel>
-          </q-tab-panels>
-        </q-card>
-      </div>
-    </div>
+          </div>
+        </q-tab-panel>
+
+        <q-tab-panel name="alarms">
+          <div class="text-h6">Alarms</div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </q-tab-panel>
+
+        <q-tab-panel name="movies">
+          <div class="text-h6">Movies</div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </q-tab-panel>
+      </q-tab-panels>
+    </q-card>
+  </div>
 
 
-  </q-page>
 </template>
 
 <script>
@@ -153,10 +144,9 @@
           }
           this.length()
           console.log(this.array1)
-          done()
           console.log('方法被执行')
         })
-
+        done()
       }
     }
   }

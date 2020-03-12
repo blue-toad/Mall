@@ -49,3 +49,6 @@
     </template>
   </q-infinite-scroll>
 </q-page-container>
+
+
+@load="$refs.target.onLoad()"

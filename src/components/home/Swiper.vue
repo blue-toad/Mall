@@ -4,7 +4,6 @@
             animated
             v-model="slide"
             arrows
-            navigation
             infinite
             swipeable
             autoplay
