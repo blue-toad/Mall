@@ -27,10 +27,6 @@ const routes = [
   {
     path: '/profile',
     component: () => import('views/profile/ProFile')
-  },
-  {
-    path: '/goods',
-    component: () => import('views/home/Goods')
   }
 ]
 

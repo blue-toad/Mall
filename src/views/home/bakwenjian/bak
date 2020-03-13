@@ -1,0 +1,131 @@
+<q-page-container v-if="goods.pop.list.length">
+  <!--        滚动条-->
+  <q-infinite-scroll @load="onLoad" :offset="400">
+    <div style="display: flex">
+
+      <!--          左边-->
+      <div style="flex: auto;width: 50%">
+        <div id="list-left">
+          <div v-for="n in array1" :key="n" class="q-pt-sm q-pl-sm">
+            <q-card class="my-card">
+              <img :src="goods.pop.list[n].show.img" class="shadow-2">
+              <q-card-section style="padding: 4px">
+                <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
+                  {{ goods.pop.list[n].title}}
+                </div>
+                <div class="text-pink-4">
+                  ￥{{ goods.pop.list[n].price }}
+                </div>
+              </q-card-section>
+            </q-card>
+          </div>
+        </div>
+      </div>
+
+      <!--          右边-->
+      <div style="flex: auto;width: 50%">
+        <div id="list-right">
+          <div v-for="n in array2" :key="n" class="q-pt-sm q-px-sm">
+            <q-card class="my-card" >
+              <img :src="goods.pop.list[n].show.img" class="shadow-2">
+              <q-card-section style="padding: 4px">
+                <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
+                  {{ goods.pop.list[n].title}}
+                </div>
+                <div class="text-pink-4">
+                  ￥{{ goods.pop.list[n].price }}
+                </div>
+              </q-card-section>
+            </q-card>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <template v-slot:loading>
+      <div class="row justify-center q-my-md">
+        <q-spinner-dots color="bg-pink-4" size="40px" />
+      </div>
+    </template>
+  </q-infinite-scroll>
+</q-page-container>
+
+
+@load="$refs.target.onLoad()"
+
+
+
+<div style="display: flex;" v-if="goods.pop.list.length">
+
+  <!--          左边-->
+  <div style="flex: auto;width: 50%;">
+    <div id="list-left">
+      <div v-for="n in array1" :key="n" class="q-pt-sm q-pl-sm">
+        <q-card class="my-card">
+          <img :src="goods.pop.list[n].show.img" class="shadow-2">
+          <q-card-section style="padding: 4px">
+            <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
+              {{ goods.pop.list[n].title}}
+            </div>
+            <div class="text-pink-4">
+              ￥{{ goods.pop.list[n].price }}
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
+  </div>
+
+  <!--          右边-->
+  <div style="flex: auto;width: 50%;">
+    <div v-for="n in array2" :key="n" class="q-pt-sm q-px-sm">
+      <q-card class="my-card" >
+        <img :src="goods.pop.list[n].show.img" class="shadow-2">
+        <q-card-section style="padding: 4px">
+          <div class="text-body2" style="font-size: small;overflow: hidden;height: 40px">
+            {{ goods.pop.list[n].title}}
+          </div>
+          <div class="text-pink-4">
+            ￥{{ goods.pop.list[n].price }}
+          </div>
+        </q-card-section>
+      </q-card>
+    </div>
+  </div>
+</div>
+
+
+created() {
+this.getHomeGoods('pop', 1)
+this.goods.pop.page = 1
+let i = 0
+while (i < 30){
+if (i % 2 === 0){this.array1.push(i)}
+else {this.array2.push(i)}
+i++
+}
+},
+methods: {
+getHomeGoods(part, page){
+getHomeGoods(part, page).then(res => {
+this.goods[part].list.push(...res.data.list)//这是一个将一个数组中的所有元素push进另一个数组的方法
+console.log(res)
+})
+},
+onLoad(index, done) {
+getHomeGoods(this.part, this.goods[this.part].page + 1).then(res => {
+this.goods[this.part].list.push(...res.data.list)
+this.goods[this.part].page ++
+let i = this.array1.length + this.array2.length
+while (i < this.goods[this.part].list.length){
+if (i % 2 === 0){this.array1.push(i)}
+else {this.array2.push(i)}
+i++
+}
+this.length()
+console.log(this.array1)
+console.log('方法被执行')
+})
+done()
+}
+}
