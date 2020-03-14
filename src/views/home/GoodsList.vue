@@ -40,8 +40,8 @@
           }
           console.log(this.goods);
           console.log(this.array1);
-          console.log('我是卢本伟');
         },
+        // 当监视一个对象时需要使用deep参数
         deep: true
       }
     }

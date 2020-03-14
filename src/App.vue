@@ -42,6 +42,7 @@
         let a = info.position
         let b = this.$refs.layout.height
         let c = window.innerHeight
+        //如果当前剩余空间不足300px开始向vuex中的数据传递
         if (b - c - a <= 200){
           this.$store.commit('changeSpace', b - a - c)
         }

@@ -13,7 +13,7 @@
       >
         <q-tab name="pop" label="人气" ></q-tab>
         <q-tab name="news" label="新品" ></q-tab>
-        <q-tab name="sel" label="热销" ></q-tab>
+        <q-tab name="sell" label="热销" ></q-tab>
       </q-tabs>
 <!--      底下的面板-->
       <q-tab-panels v-model="tab" animated swipeable>
@@ -25,7 +25,7 @@
           <GoodsList :goods="news"/>
         </q-tab-panel>
 
-        <q-tab-panel name="sel" style="padding: 0;">
+        <q-tab-panel name="sell" style="padding: 0;">
           <GoodsList :goods="sell"/>
         </q-tab-panel>
       </q-tab-panels>
@@ -59,8 +59,21 @@
     },
    watch:{
       '$store.state.space'(newVal){
-        console.log(newVal + '调用更新函数进行加载');
-        this.getGoods(this.tab, this[this.tab].page +1)
+        //不断监视当前距离底部的距离，如果发现没有距离 调用加载函数 对数组进行加载和push
+        if ((newVal === 0) &(this.$store.state.isLoading === false)) {
+          this.$store.commit('changeIsLoading', true)
+          let part = this.tab
+          if (part === 'news') {
+            part = 'new'
+          }
+          getHomeGoods(part, this[this.tab].page + 1).then(res => {
+            this[this.tab].list.push(...res.data.list)
+            this[this.tab].page ++
+            console.log(newVal + '调用更新函数进行加载');
+            this.$store.commit('changeIsLoading', false)
+          })
+        }
+
       }
    },
     created() {
