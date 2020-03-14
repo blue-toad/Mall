@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  //已封装，需要参数1.获得信息的axios方法 2.vuex中显示距离底部的信息space，isLoading属性
   import GoodsList from "./GoodsList";
   import {getHomeGoods} from "../../utils/home";
 
@@ -69,7 +70,7 @@
           getHomeGoods(part, this[this.tab].page + 1).then(res => {
             this[this.tab].list.push(...res.data.list)
             this[this.tab].page ++
-            console.log(newVal + '调用更新函数进行加载');
+            console.log(res.data.list);
             this.$store.commit('changeIsLoading', false)
           })
         }
