@@ -1,10 +1,5 @@
 <template>
   <div>
-    <q-header reveal>
-      <q-bar class="bg-pink-4 shadow-6" style="height: 43px">
-        <div class="text-white col text-center">蘑菇街</div>
-      </q-bar>
-    </q-header>
     <!--        调用已经封装的轮播图-->
     <swiper :banners="banners" :recommends="recommends" class="position"/>
     <Goods/>

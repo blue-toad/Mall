@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="pop.list.length">
     <q-card>
 <!--      头部的分类-->
       <q-tabs

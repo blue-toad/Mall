@@ -11,10 +11,6 @@ const routes = [
   {
     path: '/home',
     component: () => import('views/home/Home'),
-    children: [{
-      path: '',
-      component: () => import('views/home/Goods')
-    }]
   },
   {
     path: '/category',

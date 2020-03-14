@@ -1,5 +1,11 @@
 <template>
   <q-layout view="hHh lpR fFf" @scroll="onScroll" ref="layout">
+    <q-header reveal>
+      <q-bar v-if="model" class="bg-pink-4 shadow-6" style="height: 43px">
+        <div class="text-white col text-center">蘑菇街</div>
+      </q-bar>
+      <GoodsHead v-else/>
+    </q-header>
 
     <q-page-container>
       <keep-alive>
@@ -11,28 +17,24 @@
     </q-page-container>
 
     <q-footer class="bg-white text-black shadow-up-2" style="padding: 0;">
-      <q-tabs
-              v-model="tab"
-              class="text-grey-9 row"
-              dense
-              indicator-color="transparent"
-              active-color="pink-4"
-      >
-        <q-route-tab name="house" icon="o_house" label="主页" :ripple="false" class="col" to="/home"/>
-        <q-route-tab name="list" icon="o_list" label="分类" :ripple="false" class="col" to="/category"/>
-        <q-route-tab name="cart" icon="o_shopping_cart" label="购物车" :ripple="false" class="col" to="/cart"/>
-        <q-route-tab name="profile" icon="o_account_box" label="我的" :ripple="false" class="col" to="/profile"/>
-      </q-tabs>
+      <UserFoot v-if="model"/>
+      <GoodsFoot v-else/>
     </q-footer>
 
   </q-layout>
 </template>
 
 <script>
+  import UserFoot from "components/UserFoot";
+  import GoodsFoot from "components/GoodsFoot";
+  import GoodsHead from "components/GoodsHead";
+
   export default {
+    components: {UserFoot,GoodsFoot,GoodsHead},
     data () {
       return {
-        tab: 'house'
+        model: false,
+        tab: 'mails'
       }
     },
     mounted() {
