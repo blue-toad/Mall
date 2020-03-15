@@ -2,7 +2,9 @@
   <div>
     <div class="shadow-up-2">
       <div class="text-body2 text-weight-medium q-pa-sm">
-        <q-badge align="middle" color="deep-orange-13">{{itemInfo.discountDesc}}</q-badge>
+        <q-badge v-if="itemInfo.discountDesc != ''" align="middle" color="deep-orange-13">
+          {{itemInfo.discountDesc}}
+        </q-badge>
         {{itemInfo.title}}
       </div>
       <div class="row q-px-sm q-pl-md ">
