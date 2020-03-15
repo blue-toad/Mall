@@ -1,7 +1,7 @@
 <template>
-  <div style="flex: auto;width: 50%;">
+  <div style="flex: auto;width: 100%;">
     <div ref="test">
-      <div v-for="n in itemNumber" :key="n" class="q-pb-sm">
+      <div v-for="n in itemNumber" :key="n" class="q-pb-md" @click="$router.push('/good/' + goodsList[n].iid)">
         <q-card class="my-card" >
           <img :src="goodsList[n].show.img" class="shadow-2">
           <q-card-section style="padding: 4px">
@@ -33,6 +33,8 @@
           this.$emit('changeHeight', this.$refs.test.offsetHeight)
         })
       }
+    },
+    methods: {
     }
   }
 </script>

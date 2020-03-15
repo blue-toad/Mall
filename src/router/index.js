@@ -23,6 +23,11 @@ const routes = [
   {
     path: '/profile',
     component: () => import('views/profile/ProFile')
+  },
+  {
+    path: '/good/:iid',
+    component: () => import('views/good/Good'),
+    props: true
   }
 ]
 

@@ -8,9 +8,7 @@
     </q-header>
 
     <q-page-container>
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <router-view />
       <q-page-scroller position="bottom-right" :scroll-offset="250" :offset="[18, 18]">
         <q-btn round color="pink-4" icon="arrow_forward" class="rotate-270" />
       </q-page-scroller>

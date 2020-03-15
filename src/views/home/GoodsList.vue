@@ -1,9 +1,14 @@
 <template>
   <div>
     <div>
-      <div class="row q-px-sm" v-if="goods.list.length">
-        <GoodsItems :itemNumber="array1" :goodsList="goods.list" class="q-pr-sm" @changeHeight="balanceLeft"/>
-        <GoodsItems :itemNumber="array2" :goodsList="goods.list" ref="right" @changeHeight="balanceRight"/>
+      <div class="row q-px-md" v-if="goods.list.length">
+        <div class="col">
+          <GoodsItems :itemNumber="array1" :goodsList="goods.list" @changeHeight="balanceLeft"/>
+        </div>
+        <div style="width: 12px;flex: auto"></div>
+        <div class="col">
+          <GoodsItems :itemNumber="array2" :goodsList="goods.list" @changeHeight="balanceRight"/>
+        </div>
       </div>
     </div>
     <div class="row justify-center q-my-md">
