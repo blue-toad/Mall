@@ -10,10 +10,10 @@
       <q-btn class="q-mr-lg shadow-1" style="flex: initial" size="sm" unelevated rounded color="amber-8" label="进店逛逛" />
     </div>
 
-    <div class="row q-px-lg q-pb-lg" style="align-items:flex-end">
+    <div class="row q-px-lg q-pb-lg" style="align-items:flex-end;border-left: red 1px">
       <div class="col-3" style="height: 50px;">
         <div class="text-grey-7 q-ml-sm" style="font-size: 14px">
-          {{ shopInfo.cSells }}<br>
+          {{ shopInfo.cSells | sell }}<br>
           总销量
         </div>
       </div>
@@ -23,12 +23,12 @@
           全部宝贝
         </div>
       </div>
-      <div class="col-6">
-        <div class="row q-mr-lg" style="justify-content: flex-end" v-for="(item, index) in shopInfo.score" :key="index">
-          <div class="text-grey-9" style="font-size: 12px">
+      <div class="col-6" style="border-left:2px solid #e0e0e0 ">
+        <div class="row q-mr-lg" style="justify-content: flex-end;font-size: 12px" v-for="(item, index) in shopInfo.score" :key="index">
+          <div class="text-grey-9 text-center">
             {{ item.name }}
           </div>
-          <div class="q-ml-sm" style="width: 25px">
+          <div :class="['q-ml-sm', {low: !item.isBetter},{high: item.isBetter}]" style="width: 25px;">
             {{ item.score }}
           </div>
           <div>
@@ -45,14 +45,30 @@
 </template>
 
 <script>
+  //展示店铺的相关信息
   export default {
     name: "ShopInfo",
     props: {
       shopInfo: Object
+    },
+    filters: {
+      sell(val) {
+        let result = val
+        if (result > 10000) {
+          result = (val / 10000).toFixed(2) + '万'
+        }
+        return result
+      }
     }
   }
 </script>
 
 <style scoped>
+  .low {
+    color: #81c784;
+  }
+  .high {
+    color: #ff8a65;
+  }
 
 </style>

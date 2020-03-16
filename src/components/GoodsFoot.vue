@@ -18,10 +18,10 @@
     </div>
     <div style="width: 60%;flex: auto;text-align: center;padding-right: 3%;padding-left:1%;padding-top:3px;font-weight: bold">
       <div class="row text-center">
-        <div class="col bg-pink-4 text-white shadow-2" style="line-height:36px;border-top-left-radius:100px;border-bottom-left-radius:100px;;background-color:red;">
+        <div class="col text-white bg-pink-4 shadow-2" style="line-height:36px;border-top-left-radius:100px;border-bottom-left-radius:100px;;background-color:red;">
           加入购物车
         </div>
-        <div class="col text-white bg-orange-5 shadow-2" style="line-height:36px;border-top-right-radius:100px;border-bottom-right-radius:100px;;background-color:red;">
+        <div class="col text-white bg-orange-4 shadow-2" style="line-height:36px;border-top-right-radius:100px;border-bottom-right-radius:100px;">
           立即购买
         </div>
       </div>
