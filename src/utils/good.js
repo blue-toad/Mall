@@ -8,6 +8,12 @@ export function getGoodDetails(iid) {
     }
   })
 }
+
+export function getRecommend() {
+  return http({
+    url: '/recommend'
+  })
+}
 //构造一个对象将后台发来的信息进行解构
 export class itemInfos {
   constructor(itemInfo, columns) {

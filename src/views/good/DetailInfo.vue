@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="border-top: 10px solid #eeeeee;">
+  <div style="border-top: 10px solid #eeeeee;">
     <div class="q-pa-lg text-grey-7" style="font-size: 13px">
       {{ detailInfo.desc + '我是王鑫的爸爸' }}
     </div>

@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="row justify-center q-my-md">
+    <div class="row justify-center q-my-md" v-if="infiniteLoading">
       <q-spinner-dots color="pink-4" size="40px" />
     </div>
   </div>
@@ -19,6 +19,7 @@
 
 <script>
   //该组件已经封装，参树Goods 数组类型，需要包含商品信息的数组
+  //可选参数是否无限加载infiniteLoading
   import GoodsItems from "./GoodsItems";
   export default {
     name: "GoodsList",
@@ -33,12 +34,20 @@
       }
     },
     props: {
-      goods: Object
+      goods: Object,
+      infiniteLoading: {
+        type: Boolean,
+        default: true
+      },
+      initial: {
+        type: Number,
+        default: 30
+      }
     },
     created() {
       //构造奇数偶数数组分别给左栏和右栏
       let i = 0
-      while (i < 30){
+      while (i < this.initial){
         if (i % 2 === 0){this.array1.push(i)}
         else {this.array2.push(i)}
         i++
@@ -49,6 +58,7 @@
       goods: {
         handler(newVal) {
           let i = this.array2.length + this.array1.length
+          console.log(newVal + i)
           while (i < newVal.list.length){
             if (i % 2 === 0){this.array1.push(i)}
             else {this.array2.push(i)}
