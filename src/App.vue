@@ -31,8 +31,16 @@
     components: {UserFoot,GoodsFoot,GoodsHead},
     data () {
       return {
-        model: false,
         tab: 'mails'
+      }
+    },
+    computed: {
+      model() {
+        if (this.$route.path.indexOf('good') === 1){
+          return false
+        }else {
+          return true
+        }
       }
     },
     mounted() {

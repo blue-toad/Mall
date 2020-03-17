@@ -6,6 +6,7 @@
     <Comment :rate="rate"/>
     <DetailInfo :detail-info="detailInfo"/>
     <DetailParam :itemParams="itemParams"/>
+    <Recommend :list="recommendList"/>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
   import DetailInfo from "./DetailInfo";
   import DetailParam from "./DetailParam";
   import Comment from "./Comment";
+  import Recommend from "./Recommend";
   import {getGoodDetails, getRecommend, itemInfos, shopInfos} from "@/utils/good";
 
   export default {
@@ -27,7 +29,7 @@
       DetailInfo,    //商品照片
       DetailParam,    // 商品参数表格
       Comment,   //评论
-      // Recommend  //推荐
+      Recommend  //推荐
     },
     data() {
       return {

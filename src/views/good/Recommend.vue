@@ -1,6 +1,9 @@
 <template>
-  <diV>
-    <GoodsList :goods="goods" :infinite-loading="false"></GoodsList>
+  <diV v-if="list.length" class="q" style="border-top: 10px solid #eeeeee;">
+    <div class="q-pt-sm">
+      <div class="text-grey-7 text-center q-pb-sm" style="font-size: 15px">猜你喜欢</div>
+      <GoodsList :goods="goods" :infinite-loading="false"></GoodsList>
+    </div>
   </diV>
 </template>
 
@@ -9,14 +12,13 @@
 
   export default {
     name: "Recommend",
-    components: {
-      GoodsList
-    },
+    components: {GoodsList},
     props: {
       list: Array
     },
     data() {
       return {
+        // 因为原来传递的是一个对象，所以在把刚才的数组变为对象
         goods: {
           list: []
         }

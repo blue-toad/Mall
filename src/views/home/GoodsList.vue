@@ -38,16 +38,12 @@
       infiniteLoading: {
         type: Boolean,
         default: true
-      },
-      initial: {
-        type: Number,
-        default: 30
       }
     },
     created() {
       //构造奇数偶数数组分别给左栏和右栏
       let i = 0
-      while (i < this.initial){
+      while (i < this.goods.list.length){
         if (i % 2 === 0){this.array1.push(i)}
         else {this.array2.push(i)}
         i++
