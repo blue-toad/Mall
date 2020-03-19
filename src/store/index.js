@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     space: 10000,
     windowHeight: 10000,
-    isLoading: false
+    isLoading: false,
+    position: 0
   },
   mutations: {
     changeSpace(state, n) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     changeIsLoading(state, n){
       state.isLoading = n
+    },
+    changePosition(state, n){
+      state.position = n
     }
   },
   actions: {

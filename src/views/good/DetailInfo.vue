@@ -27,6 +27,7 @@
       //以下是为了将数组一的照片放到最后
       detailInfo(newVal) {
         this.info = newVal.detailImage[0].list.pop()
+        this.$emit('position')
       }
     }
   }

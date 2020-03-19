@@ -1,12 +1,12 @@
 <template>
-  <div style="border-top: 10px solid #eeeeee;" v-if="finish">
-    <div class="q-mt-md q-pb-sm" style="border-bottom: 1px solid #eeeeee;">
+  <div style="border-top: 10px solid #eeeeee" >
+    <div v-if="finish" class="q-mt-md q-pb-sm" style="border-bottom: 1px solid #eeeeee;">
       <div class="row q-pl-lg" style="justify-content:space-between;">
         <div style="font-size: 14px">宝贝评价({{ rate.cRate }})</div>
         <div style="font-size: 14px" class="text-deep-orange-4 q-pr-lg">查看全部></div>
       </div>
     </div>
-    <div class="q-pt-sm q-pb-lg">
+    <div v-if="finish" class="q-pt-sm q-pb-lg">
       <div class="row" style="justify-content:space-between;">
         <q-chip size="sm" color="white" class="q-px-lg" text-color="grey-7">
           <q-avatar size="sm">
@@ -43,8 +43,13 @@
     },
     watch: {
       rate() {
-        this.finish = true,
+        //利用quasar的formdate将日期格式化
         this.adjustedDate = date.formatDate(this.rate.list[0].created, '-MM-DD HH:mm')
+        this.finish = true
+      },
+      //如果当前页面加载完成，执行父方法重新计算评论的位置
+      finish() {
+        this.$emit('position')
       }
     }
   }
