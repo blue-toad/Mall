@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="background: #f5f5f5">
+    <div style="background: #f5f5f5;height: 100%">
       <q-table
               class="q-pa-md"
               :data="data" :columns="columns" row-key="name"
@@ -13,10 +13,9 @@
               <q-card-section>
                 <q-checkbox color="pink-4" dense v-model="props.selected" :label="props.row.name"/>
               </q-card-section>
-              <q-separator/>
               <div style="display: flex">
 
-                <div style="flex: none" class="q-pa-sm">
+                <div style="flex: none" class="q-px-sm q-pb-sm">
                   <q-img :src="props.row.image"
                          spinner-color="white"
                          style="height: 130px;width: 100px;border-radius:8px"
@@ -27,7 +26,7 @@
                   <q-list>
                     <q-item>
                       <q-item-section>
-                        <q-item-label style="max-height: 30px;overflow: hidden">
+                        <q-item-label style="max-height: 32px;overflow: hidden">
                           {{ props.cols[1].value }}
                         </q-item-label>
                       </q-item-section>
