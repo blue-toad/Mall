@@ -18,7 +18,7 @@
   import DetailParam from "./DetailParam";
   import Comment from "./Comment";
   import Recommend from "./Recommend";
-  import {getGoodDetails, getRecommend, itemInfos, shopInfos} from "@/utils/good";
+  import {getGoodDetails, getRecommend, itemInfos, shopInfos, cartObject} from "@/utils/good";
 
 
   export default {
@@ -42,7 +42,9 @@
         rate: {},
         recommendList: [],
         position: [],
-        part: 0
+        part: 0,
+        // 保存在本地的购物车信息
+        cart: {}
       }
     },
     props: {
@@ -62,12 +64,15 @@
     },
     created() {
       getGoodDetails(this.iid).then(res => {
+        // 将传递回来的信息解析并赋值到本地
         this.topImages = res.result.itemInfo.topImages
         this.itemInfo = new itemInfos(res.result.itemInfo, res.result.columns)
         this.shopInfo = new shopInfos(res.result.shopInfo)
         this.detailInfo = res.result.detailInfo
         this.itemParams = res.result.itemParams
         this.rate = res.result.rate
+        // 将默认信息添加到本地购物车
+        this.cart = new cartObject (this.topImages, this.itemInfo, this.shopInfo)
         console.log(res);
       })
       // 推荐信息是分开的
@@ -102,6 +107,13 @@
         this.position[1] = this.$refs.c.$el.offsetTop
         this.position[2] = this.$refs.di.$el.offsetTop
         console.log(this.position)
+      },
+      // 将当前信息加入到vuex中供购物车读取
+      addCart() {
+        console.log('将卢本伟加入到购物车')
+        this.cart.count ++
+        this.$store.commit('pushCartList', this.cart)
+        console.log(this.cart)
       }
     }
   }

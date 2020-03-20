@@ -17,7 +17,7 @@
 
     <q-footer class="bg-white text-black shadow-up-2" style="padding: 0;">
       <UserFoot v-if="model"/>
-      <GoodsFoot v-else/>
+      <GoodsFoot v-else @addCart="addCart"/>
     </q-footer>
 
   </q-layout>
@@ -67,6 +67,10 @@
       // 这个方法是 根据页面滚动的位置 改变头部栏的显示
       changePart(n) {
         this.$refs.head.changeTab(n)
+      },
+      // 将当前商品加入购物车
+      addCart() {
+        this.$refs.view.addCart()
       }
     }
   }

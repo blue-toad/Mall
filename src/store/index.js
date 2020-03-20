@@ -8,7 +8,8 @@ export default new Vuex.Store({
     space: 10000,
     windowHeight: 10000,
     isLoading: false,
-    position: 0
+    position: 0,
+    cartList: []
   },
   mutations: {
     changeSpace(state, n) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     changePosition(state, n){
       state.position = n
+    },
+    pushCartList(state, n) {
+      state.cartList.push(n)
     }
   },
   actions: {
