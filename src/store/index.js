@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     space: 10000,
     windowHeight: 10000,
+    // 该参数判断是否在进行数据的加载，避免重复触发加载函数
     isLoading: false,
     position: 0,
     cartList: []
@@ -26,7 +27,10 @@ export default new Vuex.Store({
     },
     pushCartList(state, n) {
       state.cartList.push(n)
-    }
+     }
+    // changeCartCount(state, index) {
+    //   state.cartList[index].count ++
+    // }
   },
   actions: {
   },

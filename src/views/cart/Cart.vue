@@ -1,12 +1,14 @@
 <template>
   <div>
     <div style="background: #f5f5f5;height: 100%">
+<!--      绑定的数据是data，表格头部的种类信息根据本地的columns显示-->
       <q-table
               class="q-pa-md"
               :data="data" :columns="columns" row-key="name"
               selection="multiple" :selected.sync="selected" grid
               hide-header hide-bottom
       >
+<!--        组件自动进行对每个data数组中的数据的循环，单个信息为props传递给子插槽-->
         <template v-slot:item="props">
           <div class="q-py-sm col-xs-12 col-sm-6 col-md-4 col-lg-3 grid-style-transition">
             <q-card flat>
@@ -26,6 +28,7 @@
                   <q-list>
                     <q-item>
                       <q-item-section>
+<!--                        简介-->
                         <q-item-label style="max-height: 32px;overflow: hidden">
                           {{ props.cols[1].value }}
                         </q-item-label>
@@ -67,6 +70,7 @@
     data () {
       return {
         cart:[],
+        // 选中信息
         selected: [],
         columns: [
           { name: 'image', label: '图标', field: 'image' },
@@ -74,15 +78,7 @@
           { name: 'price', label: '价格', field: 'price' },
           { name: 'count', label: '数量', field: 'count' },
         ],
-        data: [
-          {
-            name: '第一个店铺',
-            image: 'https://placeimg.com/500/300/nature',
-            title: 6.0,
-            price: 24,
-            count: 4.0,
-          }
-        ]
+        data: []
       }
     },
     created() {

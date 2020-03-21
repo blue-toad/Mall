@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  // 右边的部分
   export default {
     name: "MaitKey",
     props: {

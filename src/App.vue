@@ -2,14 +2,19 @@
 <!--  使用layout布局最好的一点是有这个scroll，可以监听滚动位置，然后头部组件和底部组件也很好用-->
   <q-layout view="hHh lpR fFf" @scroll="onScroll" ref="layout">
     <q-header reveal>
+<!--      根据model的不同显示不同的头部和底部-->
       <q-bar v-if="model" class="bg-pink-4 shadow-6" style="height: 43px">
-        <div class="text-white col text-center">蘑菇街</div>
+        <div class="text-white col text-center">{{ title }}</div>
       </q-bar>
       <GoodsHead v-else @changePosition="changePosition" ref="head"/>
     </q-header>
 
     <q-page-container>
-      <router-view ref="view" @changePart="changePart"/>
+<!--      避免重复加载-->
+      <keep-alive>
+        <router-view ref="view" @changePart="changePart"/>
+      </keep-alive>
+<!--      这个是返回顶部-->
       <q-page-scroller position="bottom-right" :scroll-offset="250" :offset="[18, 18]">
         <q-btn round color="pink-4" icon="arrow_forward" class="rotate-270" />
       </q-page-scroller>
@@ -36,15 +41,25 @@
       }
     },
     computed: {
+      // 根据该属性判断显示不同的底部和头部
       model() {
-        if (this.$route.path.indexOf('good') === 1){
+        if (this.$route.path.indexOf('good') === 1) {
           return false
-        }else {
+        } else {
           return true
         }
+      },
+      //根据不同的路由地址 输出不同的头部 文字
+      title() {
+        let path = this.$route.path
+        if (path.indexOf('home') === 1) { return '首页'}
+        else if (path.indexOf('cart') === 1) { return '购物车'}
+        else if (path.indexOf('category') === 1) { return '分类'}
+        else  { return '我的'}
       }
     },
     mounted() {
+      // 获得整个窗口的大小
       this.$store.commit('chanegWindowHeight', window.innerHeight)
     },
     methods: {

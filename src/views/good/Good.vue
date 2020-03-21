@@ -73,6 +73,7 @@
         this.rate = res.result.rate
         // 将默认信息添加到本地购物车
         this.cart = new cartObject (this.topImages, this.itemInfo, this.shopInfo)
+        this.cart.count = 1
         console.log(res);
       })
       // 推荐信息是分开的
@@ -106,14 +107,21 @@
       newPosition() {
         this.position[1] = this.$refs.c.$el.offsetTop
         this.position[2] = this.$refs.di.$el.offsetTop
-        console.log(this.position)
+        // console.log(this.position)
       },
       // 将当前信息加入到vuex中供购物车读取
       addCart() {
-        console.log('将卢本伟加入到购物车')
-        this.cart.count ++
-        this.$store.commit('pushCartList', this.cart)
-        console.log(this.cart)
+        // 获得vuex中购物车中该信息的位置
+        let index = this.$store.state.cartList.findIndex((n) => n.iid === this.cart.iid)
+        if (index >= 0) {
+          // 注意vuex中的commit只能提交一个参数
+          //日了他妈的 第一次push的是本地对象的指针，所以操作本地的cart对象就相当于在vuex中改变
+          // 所以就不需要调用vuex中的那个方法，注释了
+          this.cart.count ++
+        } else {
+          this.$store.commit('pushCartList', this.cart)
+        }
+        // console.log(this.$store.state.cartList)
       }
     }
   }

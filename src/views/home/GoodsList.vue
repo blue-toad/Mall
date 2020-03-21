@@ -80,6 +80,7 @@
       }
     },
     methods: {
+      //当组件重新渲染时更新高度
       //获得左右两栏的高度数据
       balanceLeft(height) {
         this.leftHeight = height

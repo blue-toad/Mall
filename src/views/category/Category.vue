@@ -56,8 +56,8 @@
         let maitKey = this.categories[n].maitKey
         getSubcategory(maitKey).then(res => {
           this.categoryData[n] = res.data
-          console.log('这是第' + n + '个')
-          console.log(this.categoryData)
+          // console.log('这是第' + n + '个')
+          // console.log(this.categoryData)
           // 这个finish标志第一次数据加载完成，v-if的对数组的长度判断可能有问题，当数组为空的时候没有length导致错误
           // 我的想法是用一个标志根据时候得到传递回来的数据进行判断
           // 数据加载回来了，然后渲染子组件
