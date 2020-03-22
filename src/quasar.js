@@ -12,13 +12,16 @@ import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
 import '@quasar/extras/ionicons-v4/ionicons-v4.css'
 import '@quasar/extras/mdi-v4/mdi-v4.css'
 import '@quasar/extras/eva-icons/eva-icons.css'
-import { Quasar } from 'quasar'
+import { Quasar, Notify } from 'quasar'
 
 Vue.use(Quasar, {
-  config: {},
+  config: {
+    notify: { /* look at QUASARCONFOPTIONS from the API card (bottom of page) */ }
+  },
   components: { /* not needed if importStrategy is not 'manual' */ },
   directives: { /* not needed if importStrategy is not 'manual' */ },
   plugins: {
+    Notify
   },
   lang: lang
  })

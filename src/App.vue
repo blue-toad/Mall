@@ -11,11 +11,9 @@
 
     <q-page-container>
 <!--      避免重复加载-->
-      <keep-alive>
         <router-view ref="view" @changePart="changePart"/>
-      </keep-alive>
 <!--      这个是返回顶部-->
-      <q-page-scroller position="bottom-right" :scroll-offset="250" :offset="[18, 18]">
+      <q-page-scroller v-if="!isCart" position="bottom-right" :scroll-offset="250" :offset="[18, 18]">
         <q-btn round color="pink-4" icon="arrow_forward" class="rotate-270" />
       </q-page-scroller>
     </q-page-container>
@@ -41,6 +39,14 @@
       }
     },
     computed: {
+      //判断是否是购物车，是的话不显示返回到顶部的圈圈
+      isCart() {
+        if (this.$route.path.indexOf('cart') === 1) {
+          return true
+        } else {
+          return false
+        }
+      },
       // 根据该属性判断显示不同的底部和头部
       model() {
         if (this.$route.path.indexOf('good') === 1) {
@@ -53,14 +59,16 @@
       title() {
         let path = this.$route.path
         if (path.indexOf('home') === 1) { return '首页'}
-        else if (path.indexOf('cart') === 1) { return '购物车'}
+        else if (path.indexOf('cart') === 1) { return '购物车' }
         else if (path.indexOf('category') === 1) { return '分类'}
         else  { return '我的'}
       }
     },
-    mounted() {
-      // 获得整个窗口的大小
-      this.$store.commit('chanegWindowHeight', window.innerHeight)
+    created() {
+      let height = 'min-height:' + (window.innerHeight - 43 - 56) + 'px'
+      console.log(height)
+      this.$store.commit('changeHeight', height)
+      this.$store.commit('changeWindowHeight', window.innerHeight)
     },
     methods: {
       //该方法根据显示窗口大小 当前显示的位置 最大位置

@@ -18,7 +18,7 @@
     </div>
     <div style="width: 60%;flex: auto;text-align: center;padding-right: 3%;padding-left:1%;padding-top:3px;font-weight: bold">
       <div class="row text-center">
-        <div @click="$emit('addCart')"
+        <div @click="addCart"
                 class="col text-white bg-pink-4 shadow-2"
              style="line-height:36px;border-top-left-radius:100px;border-bottom-left-radius:100px;;background-color:red;">
           加入购物车
@@ -33,7 +33,19 @@
 
 <script>
   export default {
-    name: "GoodsFoot"
+    name: "GoodsFoot",
+    methods: {
+      //单击加入购物车时触发
+      addCart() {
+        this.$emit('addCart')
+        this.$q.notify({
+          message: '成功添加到购物车',
+          color: 'pink-4',
+          position: 'center',
+          timeout: 100
+        })
+      }
+    }
   }
 </script>
 

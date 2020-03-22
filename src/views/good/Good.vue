@@ -100,7 +100,6 @@
         if (p != n){
           this.part = n
           this.$emit('changePart', n)
-          console.log('发出头部改变请求')
         }
       },
       // 如果一些组件如渲染完成后会重新调用该方法 ，重新计算位置（距离顶部）

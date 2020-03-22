@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="background: #f5f5f5;height: 100%">
+    <div style="background: #f5f5f5;padding-bottom: 30px" :style="height">
 <!--      绑定的数据是data，表格头部的种类信息根据本地的columns显示-->
       <q-table
               class="q-pa-md"
@@ -12,15 +12,17 @@
         <template v-slot:item="props">
           <div class="q-py-sm col-xs-12 col-sm-6 col-md-4 col-lg-3 grid-style-transition">
             <q-card flat>
-              <q-card-section>
-                <q-checkbox color="pink-4" dense v-model="props.selected" :label="props.row.name"/>
+              <q-card-section style="display:flex;align-items: center ">
+                <q-checkbox style="flex: auto" color="pink-4" dense v-model="props.selected" :label="props.row.name"/>
+                <div style="flex: none;font-size: 12px" class="text-grey-7">进入商店 ></div>
               </q-card-section>
               <div style="display: flex">
 
                 <div style="flex: none" class="q-px-sm q-pb-sm">
                   <q-img :src="props.row.image"
                          spinner-color="white"
-                         style="height: 130px;width: 100px;border-radius:8px"
+                         style="height: 130px;width: 100px;border-radius:5px"
+                         @click="qqqqq()"
                   />
                 </div>
 
@@ -29,7 +31,7 @@
                     <q-item>
                       <q-item-section>
 <!--                        简介-->
-                        <q-item-label style="max-height: 32px;overflow: hidden">
+                        <q-item-label style="max-height: 32px;overflow: hidden" class="text-grey-8">
                           {{ props.cols[1].value }}
                         </q-item-label>
                       </q-item-section>
@@ -39,7 +41,7 @@
                         <q-item-label>{{ props.cols[2].label }}</q-item-label>
                       </q-item-section>
                       <q-item-section side>
-                        <q-item-label>{{ props.cols[2].value }}</q-item-label>
+                        <q-item-label style="color: #f06292">{{ '￥' + props.cols[2].value }}</q-item-label>
                       </q-item-section>
                     </q-item>
                     <q-item>
@@ -60,6 +62,29 @@
         </template>
 
       </q-table>
+      <div style="height: 46px;width:100%;background-color:white;position:fixed;bottom: 56px">
+        <div style="display: flex;align-items: center" class="q-px-sm q-py-xs">
+
+          <div style="flex: auto;">
+            <q-checkbox color="pink-4" dense :selected.sync="selectedAll" :value="12"/>
+            全选({{ selected.length }})
+          </div>
+
+          <div style="flex: none">
+            <div style="display: flex;align-items: center">
+              <div>
+                合计{{ '￥' + totalPrice }}
+              </div>
+              <div class="q-pl-md">
+                <q-btn rounded color="pink-4" size="md" label="结算"/>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
     </div>
   </div>
 </template>
@@ -69,9 +94,11 @@
     name: "Cart",
     data () {
       return {
+        height: '',
         cart:[],
         // 选中信息
         selected: [],
+        selectedAll: [],
         columns: [
           { name: 'image', label: '图标', field: 'image' },
           { name: 'title', label: '简介', field: 'title' },
@@ -82,8 +109,27 @@
       }
     },
     created() {
+      // 获得vuex中的购物车信息和屏幕高度
       this.data = this.$store.state.cartList
+      this.height = this.$store.state.height
       console.log(this.cart)
+      console.log(this.height)
+    },
+    computed: {
+      // 计算总价
+      totalPrice() {
+        let item = {}
+        let price = 0
+        for(item of this.selected) {
+          price += parseFloat(item.price);
+        }
+        return price
+      }
+    },
+    methods: {
+      qqqqq() {
+        console.log(this.selected)
+      }
     }
   }
 </script>
