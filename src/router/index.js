@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+//  全部使用懒加载
 Vue.use(VueRouter)
 
 const routes = [
   {
+    // 重定向
     path: '',
     redirect: '/home'
   },
@@ -25,6 +27,7 @@ const routes = [
     component: () => import('views/profile/ProFile')
   },
   {
+    // 这个有参数
     path: '/good/:iid',
     component: () => import('views/good/Good'),
     props: true

@@ -5,10 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    space: 10000,
-    windowHeight: 10000,
-    //出去头部和底部的中间容器高度
-    hight: '',
+    space: 10000,   //距离底部的距离
+    windowHeight: 10000,  // 整个页面的高度
+    hight: '',    //出去头部和底部的中间容器高度
     // 该参数判断是否在进行数据的加载，避免重复触发加载函数
     isLoading: false,
     position: 0,

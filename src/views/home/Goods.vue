@@ -61,7 +61,7 @@
    watch:{
       '$store.state.space'(newVal){
         //不断监视当前距离底部的距离，如果发现没有距离 调用加载函数 对数组进行加载和push
-        if ((newVal === 0) &(this.$store.state.isLoading === false)) {
+        if ((newVal === 0) && (this.$store.state.isLoading === false) && (this.$route.path.indexOf('home') === 1)) {
           this.$store.commit('changeIsLoading', true)
           let part = this.tab
           if (part === 'news') {

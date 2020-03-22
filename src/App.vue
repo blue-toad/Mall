@@ -10,8 +10,10 @@
     </q-header>
 
     <q-page-container>
-<!--      避免重复加载-->
+<!--      避免重复加载 除了good页面-->
+      <keep-alive exclude="Good">
         <router-view ref="view" @changePart="changePart"/>
+      </keep-alive>
 <!--      这个是返回顶部-->
       <q-page-scroller v-if="!isCart" position="bottom-right" :scroll-offset="250" :offset="[18, 18]">
         <q-btn round color="pink-4" icon="arrow_forward" class="rotate-270" />
@@ -61,7 +63,7 @@
         if (path.indexOf('home') === 1) { return '首页'}
         else if (path.indexOf('cart') === 1) { return '购物车' }
         else if (path.indexOf('category') === 1) { return '分类'}
-        else  { return '我的'}
+        else  { return '我的账户'}
       }
     },
     created() {
@@ -101,6 +103,5 @@
 
 
 <style>
-  @import "assets/css/base.css";
 
 </style>

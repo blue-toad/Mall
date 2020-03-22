@@ -5,7 +5,7 @@
           active-color="pink-4"
           indicator-color="transparent"
   >
-    <q-tab name="back" :ripple="false" @click="$router.push('/home')">
+    <q-tab name="back" :ripple="false" @click="$router.back(-1)">
       <template><q-icon name="ion-arrow-back"></q-icon></template>
     </q-tab>
     <q-tab name="goods" label="商品" @click="changePosition(0)"/>
@@ -30,6 +30,7 @@
       changePosition(n) {
         this.$emit('changePosition', n)
       },
+      // 根据滚动的位置显示不同的标签
       changeTab(n) {
         switch (n) {
           case 1 : {this.tab = 'goods';break;}

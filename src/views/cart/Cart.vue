@@ -49,7 +49,10 @@
                         <q-item-label>{{ props.cols[3].label }}</q-item-label>
                       </q-item-section>
                       <q-item-section side>
-                        <q-item-label caption>{{ props.cols[3].value }}</q-item-label>
+                        <q-item-label caption>
+<!--                          {{ props.cols[3].value }}-->
+                          <q-input filled v-model="props.cols[3].value" dense />
+                        </q-item-label>
                       </q-item-section>
                     </q-item>
                   </q-list>
@@ -63,20 +66,20 @@
 
       </q-table>
       <div style="height: 46px;width:100%;background-color:white;position:fixed;bottom: 56px">
-        <div style="display: flex;align-items: center" class="q-px-sm q-py-xs">
+        <div style="display: flex;align-items: center" class="q-px-md q-py-xs">
 
           <div style="flex: auto;">
-            <q-checkbox color="pink-4" dense :selected.sync="selectedAll" :value="12"/>
+            <q-checkbox color="pink-4" v-model="selectedAll" />
             全选({{ selected.length }})
           </div>
 
           <div style="flex: none">
             <div style="display: flex;align-items: center">
-              <div>
-                合计{{ '￥' + totalPrice }}
+              <div class="text-pink-4" style="font-size: 18px">
+                {{ '￥' + totalPrice }}
               </div>
               <div class="q-pl-md">
-                <q-btn rounded color="pink-4" size="md" label="结算"/>
+                <q-btn rounded color="pink-4" size="md" label="结算" flat/>
               </div>
             </div>
           </div>
@@ -98,7 +101,7 @@
         cart:[],
         // 选中信息
         selected: [],
-        selectedAll: [],
+        selectedAll: false,
         columns: [
           { name: 'image', label: '图标', field: 'image' },
           { name: 'title', label: '简介', field: 'title' },
@@ -124,6 +127,23 @@
           price += parseFloat(item.price);
         }
         return price
+      }
+    },
+    watch: {
+      // 判断是否进行全选
+      // 如果全选 则将data中的 全部数据push到selected中
+      // 否则清空selected
+      selectedAll(newVal) {
+        let item = null
+        if (newVal == true) {
+          this.selected = []
+          for (item of this.data) {
+            this.selected.push(item)
+          }
+          console.log('全选')
+        } else {
+          this.selected = []
+        }
       }
     },
     methods: {

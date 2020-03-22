@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Swiper from "components/home/Swiper.vue";
+  import Swiper from "./Swiper";
   import Goods from "./Goods";
   import {getHomeMultidata} from "@/utils/home";
 
@@ -29,8 +29,6 @@
         this.banners = res.data.banner.list
         this.recommends = res.data.recommend.list
       });
-    },
-    methods: {
     }
   }
 </script>
