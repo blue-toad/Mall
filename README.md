@@ -1,24 +1,26 @@
-# mall
+这个项目的基本功能都已经实现
 
-## Project setup
-```
-npm install
-```
+一下是我感觉的几个问题
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 响应式布局
 
-### Compiles and minifies for production
-```
-npm run build
-```
+这个响应式布局很重要，目前有些地方实现的不是很好，比如确定中间的page-container 的大小的时候很不优雅
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 滚动容器
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+这个滚动容器包括三个方面
+
+* 上拉刷新
+* 下拉加载
+* 滚动不同的位置，触发不同的事件
+
+## css基础
+
+包括字体的大小，样式和flex布局都很问题，还有就是vm这种新的单位取代px的单位，看起来很不错，下次实现
+
+`npm install`
+
+`npm run serve`
+
+
+
