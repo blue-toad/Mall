@@ -11,7 +11,7 @@
 
     <q-page-container>
 <!--      避免重复加载 除了good页面-->
-      <keep-alive exclude="Good">
+      <keep-alive exclude="Good,Cart">
         <router-view ref="view" @changePart="changePart"/>
       </keep-alive>
 <!--      这个是返回顶部-->

@@ -49,5 +49,4 @@ export class cartObject {
     this.title = itemInfo.title
     this.count = 0
   }
-
 }

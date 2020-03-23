@@ -18,7 +18,7 @@ export default new Vuex.Store({
     changeSpace(state, n) {
       state.space = n
     },
-    chanegWindowHeight(state, n){
+    changeWindowHeight(state, n){
       state.windowHeight = n
     },
     changeIsLoading(state, n){
