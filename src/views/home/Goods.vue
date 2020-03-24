@@ -86,6 +86,7 @@
       //获得商品信息的请求
       getGoods(part, page) {
         getHomeGoods(part, page).then(res => {
+          console.log(res)
           if (part === 'new'){
             part = 'news'
           }
